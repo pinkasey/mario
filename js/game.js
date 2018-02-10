@@ -70,9 +70,18 @@ function init() {
     powerup: new Audio('sounds/powerup.wav'),
     stomp: new Audio('sounds/stomp.wav')
   };
-  Mario.oneone();
-  lastTime = Date.now();
-  main();
+//  Mario.oneone();
+
+  fetch('/js/levels/11.json')
+    .then(response => response.json())
+    .then(jsonResponse => {
+          var reader = new Mario.LevelJsonReader();
+          reader.read( jsonResponse );
+          lastTime = Date.now();
+          main();
+        }
+    );
+
 }
 
 var gameTime = 0;
